@@ -8,6 +8,10 @@ class Service(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Paslauga"
+        verbose_name_plural = "Paslaugos"
+
 class Car(models.Model):
     make = models.CharField()
     model = models.CharField()
@@ -18,6 +22,10 @@ class Car(models.Model):
     def __str__(self):
         return f"{self.make} {self.model}"
 
+    class Meta:
+        verbose_name = "Automobilis"
+        verbose_name_plural = "Automobiliai"
+
 
 class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
@@ -25,6 +33,10 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self.car} - {self.date}"
+
+    class Meta:
+        verbose_name = "Užsakymas"
+        verbose_name_plural = "Užsakymai"
 
 
 class OrderLine(models.Model):
@@ -34,3 +46,7 @@ class OrderLine(models.Model):
 
     def __str__(self):
         return f"{self.service} ({self.service.price}) - {self.quantity}"
+
+    class Meta:
+        verbose_name = "Eilutė"
+        verbose_name_plural = "Eilutės"
