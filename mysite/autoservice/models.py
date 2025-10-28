@@ -47,6 +47,11 @@ class OrderLine(models.Model):
     def __str__(self):
         return f"{self.service} ({self.service.price}) - {self.quantity}"
 
+    def line_sum(self):
+        return self.service.price * self.quantity
+
+    line_sum.short_description = "Suma"
+
     class Meta:
         verbose_name = "Eilutė"
         verbose_name_plural = "Eilutės"
