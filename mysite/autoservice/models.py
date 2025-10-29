@@ -31,6 +31,16 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     car = models.ForeignKey(to="Car", on_delete=models.SET_NULL, null=True, blank=True)
 
+    LOAN_STATUS = (
+        ('c', "Confirmed"),
+        ('i', 'In Progress'),
+        ('o', 'Completed'),
+        ('c', 'Canceled'),
+    )
+
+    status = models.CharField(verbose_name="Būsena", max_length=1, choices=LOAN_STATUS, default="c", blank=True)
+
+
     def __str__(self):
         return f"{self.car} - {self.date}"
 

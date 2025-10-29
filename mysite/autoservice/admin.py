@@ -12,7 +12,7 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderLineInLine]
     readonly_fields = ['date', 'total']
     fieldsets = [
-        ('General', {'fields': ('car', 'date', 'total')}),
+        ('General', {'fields': ('car', 'date', 'status', 'total')}),
     ]
 
 class CarAdmin(admin.ModelAdmin):
