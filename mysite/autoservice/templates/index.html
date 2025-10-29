@@ -4,4 +4,10 @@
 {% block content %}
 <h1>Mano autoservisas</h1>
 <p>Sveiki atvykę į mūsų autoservisą!</p>
+<h2>Statistika:</h2>
+<ul>
+    <li><strong>Teikiamų paslaugų: </strong>{{ num_services }}</li>
+    <li><strong>Registruotų automobilių: </strong>{{ num_cars }}</li>
+    <li><strong>Atliktų užsakymų: </strong>{{ num_orders_completed }}</li>
+</ul>
 {% endblock %}
