@@ -4,6 +4,6 @@
 {% block content %}
 <h1>Užsakymai:</h1>
 {% for order in orders %}
-<p><a href="">{{ order }}</a></p>
+<p><a href="{{ order.pk }}">{{ order }}</a></p>
 {% endfor %}
 {% endblock %}

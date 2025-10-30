@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Užsakymas{% endblock %}
+
+{% block content %}
+<h1>Užsakymas:</h1>
+<p>Automobilis: <b>{{ order.car }}</b></p>
+<p>Data: <b>{{ order.date }}</b></p>
+<p>Būsena: <b>{{ order.get_status_display }}</b></p>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Paslauga</th>
+        <th>Kaina</th>
+        <th>Kiekis</th>
+        <th>Suma</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for line in order.lines.all %}
+    <tr>
+        <td>{{ line.service.name }}</td>
+        <td>{{ line.service.price }}</td>
+        <td>{{ line.quantity }}</td>
+        <td>{{ line.line_sum }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <th colspan="3">Bendra suma:</th>
+        <th>{{ order.total }}</th>
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}
