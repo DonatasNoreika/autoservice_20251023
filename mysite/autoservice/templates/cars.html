@@ -3,9 +3,27 @@
 
 {% block content %}
 <h1>Automobiliai:</h1>
-{% for car in cars %}
-<p><a href="{% url 'car' car.pk %}">{{ car }}</a></p>
-{% endfor %}
+{% load static %}
+<div class="container">
+    <div class="row">
+    {% for car in cars %}
+        <div class="col-md-6 d-flex align-items-stretch">
+            <div class="card mb-4 shadow-sm img-fluid">
+                {% if car.photo %}
+                <img src="{{ car.photo.url }}" class="card-img-top" alt="...">
+                {% else %}
+                <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+                {% endif %}
+                <div class="card-body">
+                    <a href="{{ car.pk }}"><h6 class="card-subtitle mb-2 text-muted">{{ car }}</h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    </div>
+</div>
 
 {% if cars.has_other_pages %}
 <div class="container">

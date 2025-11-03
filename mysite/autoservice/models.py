@@ -18,6 +18,7 @@ class Car(models.Model):
     license_plate = models.CharField()
     vin_code = models.CharField()
     client_name = models.CharField()
+    photo = models.ImageField(upload_to="car_photos", null=True, blank=True)
 
     def __str__(self):
         return f"{self.make} {self.model}"

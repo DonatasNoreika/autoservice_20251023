@@ -2,6 +2,9 @@
 {% block title %}Automobilis{% endblock %}
 
 {% block content %}
+{% if car.photo %}
+<img src="{{ car.photo.url }}" class="card-img-top" alt="...">
+{% endif %}
 <h1>Automobilis:</h1>
 <p>Gamintojas: <b>{{ car.make }}</b></p>
 <p>Modelis: <b>{{ car.model }}</b></p>
