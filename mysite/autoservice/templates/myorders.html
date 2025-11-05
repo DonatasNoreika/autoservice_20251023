@@ -2,8 +2,8 @@
 {% block title %}Mano Užsakymai{% endblock %}
 
 {% block content %}
-<h1>Mano Užsakymai:</h1>
+<h1>Mano užsakymai:</h1>
 {% for order in orders %}
-<p><a href="{% url 'order' order.pk %}">{{ order }}</a></p>
+<p><a href="{% url 'order' order.pk %}">{{ order.car }}</a> - <span class="{% if order.is_overdue %}text-danger{% endif %}">{{ order.deadline }}</span></p>
 {% endfor %}
 {% endblock %}
