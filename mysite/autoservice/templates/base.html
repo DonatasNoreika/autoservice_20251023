@@ -33,6 +33,7 @@
                                 <i class="bi bi-person-bounding-box"> {{ user.username }}</i>
                             </a>
                         </li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'myorders' %}">Mano Užsakymai</a></li>
                         <li class="nav-item">
                             <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}

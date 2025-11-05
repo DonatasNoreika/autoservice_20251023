@@ -3,6 +3,7 @@ from .models import Service, Car, Order, OrderLine
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     num_visits = request.session.get('num_visits', 1)
@@ -53,3 +54,12 @@ def search(request):
         "cars": car_search_results,
     }
     return render(request, template_name="search.html", context=context)
+
+class UserOrderListView(LoginRequiredMixin, generic.ListView):
+    model = Order
+    template_name = "myorders.html"
+    context_object_name = "orders"
+
+    def get_queryset(self):
+        return Order.objects.filter(client=self.request.user)
+
