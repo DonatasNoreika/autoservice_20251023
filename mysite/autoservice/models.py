@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Service(models.Model):
@@ -40,7 +41,7 @@ class Order(models.Model):
     )
 
     status = models.CharField(verbose_name="Būsena", max_length=1, choices=LOAN_STATUS, default="c", blank=True)
-
+    client = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.car} - {self.date}"
