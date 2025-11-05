@@ -11,4 +11,5 @@
 <p>Valstybinis numeris: <b>{{ car.license_plate }}</b></p>
 <p>VIN kodas: <b>{{ car.vin_code }}</b></p>
 <p>Kliento vardas: <b>{{ car.client_name }}</b></p>
+<p>{{ car.description | safe }}</p>
 {% endblock %}
