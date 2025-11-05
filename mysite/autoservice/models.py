@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from tinymce.models import HTMLField
 
 class Service(models.Model):
     name = models.CharField()
@@ -20,6 +21,7 @@ class Car(models.Model):
     vin_code = models.CharField()
     client_name = models.CharField()
     photo = models.ImageField(upload_to="car_photos", null=True, blank=True)
+    description = HTMLField(verbose_name="Description", default="")
 
     def __str__(self):
         return f"{self.make} {self.model}"
