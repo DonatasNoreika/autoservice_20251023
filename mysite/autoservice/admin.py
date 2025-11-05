@@ -8,11 +8,11 @@ class OrderLineInLine(admin.TabularInline):
     readonly_fields = ['line_sum']
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['car', 'date', 'client', 'total']
+    list_display = ['car', 'date', 'deadline', 'client', 'total']
     inlines = [OrderLineInLine]
     readonly_fields = ['date', 'total']
     fieldsets = [
-        ('General', {'fields': ('car', 'date', 'status', 'client', 'total')}),
+        ('General', {'fields': ('car', 'date', 'deadline', 'client', 'status', 'total')}),
     ]
 
 class CarAdmin(admin.ModelAdmin):
