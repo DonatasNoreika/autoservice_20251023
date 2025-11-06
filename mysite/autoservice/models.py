@@ -80,3 +80,17 @@ class OrderLine(models.Model):
     class Meta:
         verbose_name = "Eilutė"
         verbose_name_plural = "Eilutės"
+
+
+class OrderComment(models.Model):
+    order = models.ForeignKey(to="Order", on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+
+
+    class Meta:
+        verbose_name = "Komentaras"
+        verbose_name_plural = "Komentarai"
+        ordering = ['-pk']
+

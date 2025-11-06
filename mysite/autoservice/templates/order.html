@@ -34,4 +34,22 @@
     </tbody>
 </table>
 
+<h2>Komentarai:</h2>
+<br/>
+{% if user.is_authenticated %}
+<form method="post" class="mb-4">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-secondary">Paskelbti</button>
+</form>
+{% endif %}
+{% for comment in order.comments.all %}
+<p><strong>{{ comment.author }}</strong>, <em>{{ comment.date_created }}</em></p>
+<p>{{ comment.content }}</p>
+<hr>
+{% empty %}
+<p>Komentarų nėra</p>
+{% endfor %}
+
 {% endblock %}
