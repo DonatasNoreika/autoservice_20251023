@@ -29,7 +29,7 @@
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'orders' %}">Užsakymai</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="">
+                            <a class="nav-link" aria-current="page" href="{% url 'profile' %}">
                                 <i class="bi bi-person-bounding-box"> {{ user.username }}</i>
                             </a>
                         </li>

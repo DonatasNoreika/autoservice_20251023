@@ -1,5 +1,5 @@
 from django.shortcuts import render, reverse
-from .models import Service, Car, Order, OrderLine
+from .models import Service, Car, Order, OrderLine, CustomUser
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormMixin
-from .forms import OrderCommentForm
+from .forms import OrderCommentForm, CustomUserChangeForm
 
 def index(request):
     num_visits = request.session.get('num_visits', 1)
@@ -90,4 +90,14 @@ class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     template_name = "signup.html"
     success_url = reverse_lazy("login")
+
+
+class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = CustomUser
+    form_class = CustomUserChangeForm
+    template_name = "profile.html"
+    success_url = reverse_lazy('profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
