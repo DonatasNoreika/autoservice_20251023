@@ -53,7 +53,7 @@
 {% endif %}
 {% for comment in order.comments.all %}
 <p>
-    {% if order.client.photo %}
+    {% if comment.author.photo %}
         <img class="rounded-circle account-img" style="width: 30px" src="{{ comment.author.photo.url }}">
     {% endif %}
     <strong>
