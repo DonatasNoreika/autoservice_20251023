@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormMixin
-from .forms import OrderCommentForm, CustomUserChangeForm
+from .forms import OrderCommentForm, CustomUserChangeForm, CustomUserCreateForm
 
 def index(request):
     num_visits = request.session.get('num_visits', 1)
@@ -87,7 +87,7 @@ class UserOrderListView(LoginRequiredMixin, generic.ListView):
 
 
 class SignUpView(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserCreateForm
     template_name = "signup.html"
     success_url = reverse_lazy("login")
 

@@ -6,7 +6,14 @@
 <p>Automobilis: <b>{{ order.car }}</b></p>
 <p>Data: <b>{{ order.date }}</b></p>
 <p>Terminas: <b class="{% if order.is_overdue %}text-danger{% endif %}">{{ order.deadline }}</b></p>
-<p>Klientas: <b>{{ order.client }}</b></p>
+<p>Klientas:
+    <b>
+    {% if order.client.photo %}
+        <img class="rounded-circle account-img" style="width: 30px" src="{{ order.client.photo.url }}">
+    {% endif %}
+    {{ order.client }}
+    </b>
+</p>
 <p>Būsena: <b>{{ order.get_status_display }}</b></p>
 
 <table class="table table-hover">
@@ -45,7 +52,15 @@
 </form>
 {% endif %}
 {% for comment in order.comments.all %}
-<p><strong>{{ comment.author }}</strong>, <em>{{ comment.date_created }}</em></p>
+<p>
+    {% if order.client.photo %}
+        <img class="rounded-circle account-img" style="width: 30px" src="{{ comment.author.photo.url }}">
+    {% endif %}
+    <strong>
+    {{ comment.author }}
+    </strong>,
+    <em>{{ comment.date_created }}</em>
+</p>
 <p>{{ comment.content }}</p>
 <hr>
 {% empty %}
