@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from tinymce.models import HTMLField
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser(AbstractUser):
+    photo = models.ImageField(upload_to="profile_pics", null=True, blank=True)
 
 class Service(models.Model):
     name = models.CharField()
@@ -43,7 +47,7 @@ class Order(models.Model):
     )
 
     status = models.CharField(verbose_name="Būsena", max_length=1, choices=LOAN_STATUS, default="c", blank=True)
-    client = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, blank=True)
+    client = models.ForeignKey(to="autoservice.CustomUser", on_delete=models.SET_NULL, null=True, blank=True)
     deadline = models.DateTimeField()
 
     def is_overdue(self):
@@ -84,7 +88,7 @@ class OrderLine(models.Model):
 
 class OrderComment(models.Model):
     order = models.ForeignKey(to="Order", on_delete=models.CASCADE, related_name="comments")
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    author = models.ForeignKey(to="autoservice.CustomUser", on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
 
