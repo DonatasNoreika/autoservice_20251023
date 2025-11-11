@@ -122,3 +122,12 @@ class OrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateVie
 
     def test_func(self):
         return self.get_object().client == self.request.user
+
+class OrderDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Order
+    template_name = "order_delete.html"
+    context_object_name = "order"
+    success_url = reverse_lazy('myorders')
+
+    def test_func(self):
+        return self.get_object().client == self.request.user

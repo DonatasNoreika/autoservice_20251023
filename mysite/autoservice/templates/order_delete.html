@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Užsakymo trynimas{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md">
+            <h2 class="mb-4 text-center">Užsakymo trynimas</h2>
+            <p>Ar tikrai norite ištrinti užsakymą "{{ order }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                <button type="submit" class="btn btn-secondary">Patvirtinti</button>
+                <a class="btn btn-danger" href="{% url 'order' order.pk %}">Atšaukti</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
