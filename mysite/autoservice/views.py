@@ -117,8 +117,11 @@ class OrderCreateView(LoginRequiredMixin, generic.CreateView):
 class OrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Order
     template_name = "order_form.html"
-    success_url = reverse_lazy('myorders')
     fields = ['car', 'status', 'deadline']
+    # success_url = reverse_lazy('myorders')
+
+    def get_success_url(self):
+        return reverse("order", kwargs={"pk": self.object.pk})
 
     def test_func(self):
         return self.get_object().client == self.request.user
