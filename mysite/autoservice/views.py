@@ -3,7 +3,7 @@ from .models import Service, Car, Order, OrderLine, CustomUser
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormMixin
@@ -112,3 +112,13 @@ class OrderCreateView(LoginRequiredMixin, generic.CreateView):
         form.instance.client = self.request.user
         form.save()
         return super().form_valid(form)
+
+
+class OrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = Order
+    template_name = "order_form.html"
+    success_url = reverse_lazy('myorders')
+    fields = ['car', 'status', 'deadline']
+
+    def test_func(self):
+        return self.get_object().client == self.request.user

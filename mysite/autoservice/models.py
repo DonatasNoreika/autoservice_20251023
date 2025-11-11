@@ -56,7 +56,7 @@ class Order(models.Model):
         ('c', "Confirmed"),
         ('i', 'In Progress'),
         ('o', 'Completed'),
-        ('c', 'Canceled'),
+        ('e', 'Canceled'),
     )
 
     status = models.CharField(verbose_name="Būsena", max_length=1, choices=LOAN_STATUS, default="c", blank=True)

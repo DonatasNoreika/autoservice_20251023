@@ -15,7 +15,9 @@
     </b>
 </p>
 <p>Būsena: <b>{{ order.get_status_display }}</b></p>
-
+<div>
+    <a class="btn btn-warning" href="{% url 'orders_update' order.pk %}">Redaguoti</a>
+</div>
 <table class="table table-hover">
     <thead>
     <tr>
