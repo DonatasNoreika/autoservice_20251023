@@ -16,4 +16,5 @@ urlpatterns = [
     path("orders/<int:pk>/delete/", views.OrderDeleteView.as_view(), name="orders_delete"),
     path("orders/<int:pk>/linecreate/", views.OrderLineCreateView.as_view(), name="line_create"),
     path("lines/<int:pk>/update/", views.OrderLineUpdateView.as_view(), name="line_update"),
+    path("lines/<int:pk>/delete/", views.OrderLineDeleteView.as_view(), name="line_delete"),
 ]

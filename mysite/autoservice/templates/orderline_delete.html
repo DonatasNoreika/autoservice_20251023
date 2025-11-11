@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Paslaugos šalinimas{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md">
+            <h2 class="mb-4 text-center">Paslaugos šalinimas</h2>
+            <p>Ar tikrai norite pašalinti paslaugą "{{ line }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                <button type="submit" class="btn btn-secondary">Patvirtinti</button>
+                <a class="btn btn-danger" href="{% url 'order' line.order.pk %}">Atšaukti</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

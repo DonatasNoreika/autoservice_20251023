@@ -167,3 +167,15 @@ class OrderLineUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.Updat
     def test_func(self):
         return Order.objects.get(pk=self.get_object().order.pk).client == self.request.user
 
+
+class OrderLineDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = OrderLine
+    template_name = "orderline_delete.html"
+    context_object_name = "line"
+
+    def get_success_url(self):
+        return reverse("order", kwargs={"pk": self.object.order.pk})
+
+    def test_func(self):
+        return Order.objects.get(pk=self.get_object().order.pk).client == self.request.user
+

@@ -45,7 +45,8 @@
         <td>{{ line.line_sum }}</td>
         {% if order.client == user %}
         <td>
-            <a class="btn btn-warning" href="{% url 'line_update' line.pk %}">Redaguoti</a>
+            <a class="btn btn-warning btn-sm" href="{% url 'line_update' line.pk %}">Redaguoti</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'line_delete' line.pk %}">Ištrinti</a>
         </td>
         {% endif %}
     </tr>
