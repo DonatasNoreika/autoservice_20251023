@@ -31,6 +31,9 @@
         <th>Kaina</th>
         <th>Kiekis</th>
         <th>Suma</th>
+        {% if order.client == user %}
+        <th></th>
+        {% endif %}
     </tr>
     </thead>
     <tbody>
@@ -40,11 +43,19 @@
         <td>{{ line.service.price }}</td>
         <td>{{ line.quantity }}</td>
         <td>{{ line.line_sum }}</td>
+        {% if order.client == user %}
+        <td>
+            <a class="btn btn-warning" href="{% url 'line_update' line.pk %}">Redaguoti</a>
+        </td>
+        {% endif %}
     </tr>
     {% endfor %}
     <tr>
         <th colspan="3">Bendra suma:</th>
         <th>{{ order.total }}</th>
+        {% if order.client == user %}
+        <th></th>
+        {% endif %}
     </tr>
     </tbody>
 </table>
