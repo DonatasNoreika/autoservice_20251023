@@ -101,3 +101,14 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+
+class OrderCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Order
+    template_name = "order_form.html"
+    success_url = reverse_lazy('myorders')
+    fields = ['car', 'status', 'deadline']
+
+    def form_valid(self, form):
+        form.instance.client = self.request.user
+        form.save()
+        return super().form_valid(form)
