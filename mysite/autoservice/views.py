@@ -7,7 +7,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormMixin
-from .forms import OrderCommentForm, CustomUserChangeForm, CustomUserCreateForm
+from .forms import (OrderCommentForm,
+                    CustomUserChangeForm,
+                    CustomUserCreateForm,
+                    OrderCreateUpdateForm)
 
 def index(request):
     num_visits = request.session.get('num_visits', 1)
@@ -106,7 +109,8 @@ class OrderCreateView(LoginRequiredMixin, generic.CreateView):
     model = Order
     template_name = "order_form.html"
     success_url = reverse_lazy('myorders')
-    fields = ['car', 'status', 'deadline']
+    # fields = ['car', 'status', 'deadline']
+    form_class = OrderCreateUpdateForm
 
     def form_valid(self, form):
         form.instance.client = self.request.user
@@ -117,7 +121,8 @@ class OrderCreateView(LoginRequiredMixin, generic.CreateView):
 class OrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Order
     template_name = "order_form.html"
-    fields = ['car', 'status', 'deadline']
+    form_class = OrderCreateUpdateForm
+    # fields = ['car', 'status', 'deadline']
     # success_url = reverse_lazy('myorders')
 
     def get_success_url(self):
